@@ -16,46 +16,46 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
     @Mock
-    private JdbcUserRepository userRepository;
+    private JdbcUserRepository userRepositoryMock;
     @InjectMocks
     private UserServiceImplement userService;
 
     @Test
     void saveUser() {
         User user = new User("test", "test@example.com");
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepositoryMock.save(user)).thenReturn(user);
         assertEquals(user, userService.save(user));
-        verify(userRepository).save(user);
+        verify(userRepositoryMock).save(user);
     }
 
     @Test
     void findById() {
         User user = new User(1, "test", "test@example.com");
-        when(userRepository.findById(1)).thenReturn(Optional.of(user));
+        when(userRepositoryMock.findById(1)).thenReturn(Optional.of(user));
         assertEquals(user, userService.findById(1).orElse(null));
-        verify(userRepository).findById(1);
+        verify(userRepositoryMock).findById(1);
     }
 
     @Test
     void findAll() {
         List<Model> users = List.of(new User("test", "test@example.com"));
-        when(userRepository.findAll()).thenReturn(users);
+        when(userRepositoryMock.findAll()).thenReturn(users);
         assertEquals(users, userService.findAll());
-        verify(userRepository).findAll();
+        verify(userRepositoryMock).findAll();
     }
 
     @Test
     void update() {
         User user = new User(1, "new", "new@example.com");
-        when(userRepository.update(user)).thenReturn(user);
+        when(userRepositoryMock.update(user)).thenReturn(user);
         assertEquals(user, userService.update(user));
-        verify(userRepository).update(user);
+        verify(userRepositoryMock).update(user);
     }
 
     @Test
     void delete() {
-        when(userRepository.delete(1)).thenReturn(true);
+        when(userRepositoryMock.delete(1)).thenReturn(true);
         assertTrue(userService.delete(1));
-        verify(userRepository).delete(1);
+        verify(userRepositoryMock).delete(1);
     }
 }
