@@ -21,12 +21,12 @@ public class JdbcUserRepositoryIntegrationTest {
     private JdbcUserRepository userRepository;
 
     @BeforeEach
-    public void setUp() throws SQLException {
+    public void setUp() {
         userRepository = new JdbcUserRepository(databaseConfig);
     }
 
     @AfterEach
-    public void tearDown() throws SQLException {
+    public void tearDown() {
         String sql = "DROP ALL OBJECTS DELETE FILES";
 
         try (Connection connection = databaseConfig.getConnection()) {
